@@ -8,10 +8,10 @@ public static class Integrator
     {
         particle.transform.position += new Vector3(particle.velocity.x * dt, particle.velocity.y * dt);
 
-	// TODO: YOUR CODE HERE
-	// Determine acceleration
-	// --- END TODO
-
+        // TODO: YOUR CODE HERE
+        // Determine acceleration
+        // --- END TODO
+        particle.acceleration = particle.accumulatedForces * particle.inverseMass;
         particle.velocity += particle.acceleration * dt;
         particle.velocity *= Mathf.Pow(particle.damping, dt);
     }

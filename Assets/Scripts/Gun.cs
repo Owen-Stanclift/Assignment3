@@ -1,3 +1,4 @@
+using Codice.Client.Common.TreeGrouper;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -117,7 +118,7 @@ public class Gun : MonoBehaviour
     public GameObject FireAttractorForceWeapon()
     {
         // TODO: YOUR CODE HERE
-
+        
         return null;
     }
 
@@ -154,6 +155,14 @@ public class Gun : MonoBehaviour
         if (Keyboard.current.wKey.wasPressedThisFrame)
         {
             CycleNextWeapon();
+        }
+        if(Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            FireAttractorForceWeapon();
+        }
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            FireRepulsiveForceWeapon();
         }
     }
 }
