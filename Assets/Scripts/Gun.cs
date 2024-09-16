@@ -92,8 +92,20 @@ public class Gun : MonoBehaviour
     /// <returns>The created spring object (NOT the spring object's target)</returns>
     public GameObject FirePairedSpringWeapon()
     {
+        
+        GameObject particle = Fire();
+        particle.AddComponent<SpringForce>();
+        particle.GetComponent<SpringForce>().restLength = 1;
+        particle.GetComponent<SpringForce>().springConstant = 3;
+
+        SpringObject = Fire();
+        particle.AddComponent<SpringForce>();
+        particle.GetComponent<SpringForce>().restLength = 1;
+        particle.GetComponent<SpringForce>().springConstant = 3;
+
+        particle.GetComponent<SpringForce>().other = SpringObject.transform;
         // TODO: YOUR CODE HERE
-        return null;
+        return particle;
     }
 
 
@@ -105,8 +117,14 @@ public class Gun : MonoBehaviour
     /// <returns>The created spring object</returns>
     public GameObject FireStaticSpringWeapon()
     {
+        GameObject particle = Fire();
+        particle.AddComponent<SpringForce>();
+
+        particle.GetComponent<SpringForce>().other = gameObject.transform;
+        particle.GetComponent<SpringForce>().restLength = 1;
+        particle.GetComponent<SpringForce>().springConstant = 3;
         // TODO: YOUR CODE HERE
-        return null;
+        return particle;
     }
 
     /// <summary>
@@ -118,8 +136,13 @@ public class Gun : MonoBehaviour
     public GameObject FireAttractorForceWeapon()
     {
         // TODO: YOUR CODE HERE
-        
-        return null;
+        GameObject particle = Fire();
+        particle.AddComponent<AttractorForce>();
+        particle.AddComponent<ForceMouseController>();
+
+        particle.GetComponent<AttractorForce>().power = 5;
+        particle.GetComponent<ForceMouseController>().target = particle.GetComponent<AttractorForce>();
+        return particle;
     }
 
     /// <summary>
@@ -131,8 +154,13 @@ public class Gun : MonoBehaviour
     public GameObject FireRepulsiveForceWeapon()
     {
         // TODO: YOUR CODE HERE
+        GameObject particle = Fire();
+        particle.AddComponent<AttractorForce>();
+        particle.AddComponent<ForceMouseController>();
 
-        return null;
+        particle.GetComponent<AttractorForce>().power = -5;
+        particle.GetComponent<ForceMouseController>().target = particle.GetComponent<AttractorForce>();
+        return particle;
     }
 
     void Update()
@@ -159,6 +187,7 @@ public class Gun : MonoBehaviour
         if(Mouse.current.leftButton.wasPressedThisFrame)
         {
             FireAttractorForceWeapon();
+            
         }
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {

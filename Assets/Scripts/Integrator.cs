@@ -14,5 +14,6 @@ public static class Integrator
         particle.acceleration = particle.accumulatedForces * particle.inverseMass;
         particle.velocity += particle.acceleration * dt;
         particle.velocity *= Mathf.Pow(particle.damping, dt);
+        particle.ClearForces();
     }
 }

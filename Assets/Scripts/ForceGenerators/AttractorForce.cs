@@ -10,6 +10,8 @@ public class AttractorForce : ForceGenerator
 
     public override void UpdateForce(Particle2D particle)
     {
+        Vector2 force = (targetPos - particle.gameObject.transform.position)*power;
+        particle.AddForce(force);
         // TODO: YOUR CODE HERE
     }
 }
