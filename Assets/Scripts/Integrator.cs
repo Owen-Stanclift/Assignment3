@@ -12,6 +12,7 @@ public static class Integrator
         // Determine acceleration
         // --- END TODO
         particle.acceleration = particle.accumulatedForces * particle.inverseMass;
+        particle.acceleration += particle.gravity;
         particle.velocity += particle.acceleration * dt;
         particle.velocity *= Mathf.Pow(particle.damping, dt);
         particle.ClearForces();

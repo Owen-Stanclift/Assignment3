@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class Gun : MonoBehaviour
 {
@@ -99,11 +100,12 @@ public class Gun : MonoBehaviour
         particle.GetComponent<SpringForce>().springConstant = 3;
 
         SpringObject = Fire();
-        particle.AddComponent<SpringForce>();
-        particle.GetComponent<SpringForce>().restLength = 1;
-        particle.GetComponent<SpringForce>().springConstant = 3;
+        SpringObject.AddComponent<SpringForce>();
+        SpringObject.GetComponent<SpringForce>().restLength = 1;
+        SpringObject.GetComponent<SpringForce>().springConstant = 3;
 
         particle.GetComponent<SpringForce>().other = SpringObject.transform;
+        SpringObject.GetComponent<SpringForce>().other = particle.transform;
         // TODO: YOUR CODE HERE
         return particle;
     }
@@ -140,8 +142,9 @@ public class Gun : MonoBehaviour
         particle.AddComponent<AttractorForce>();
         particle.AddComponent<ForceMouseController>();
 
-        particle.GetComponent<AttractorForce>().power = 5;
+        particle.GetComponent<AttractorForce>().power = 100.0f;
         particle.GetComponent<ForceMouseController>().target = particle.GetComponent<AttractorForce>();
+        particle.GetComponent<ForceMouseController>().activationButton = ForceMouseController.MouseButton.LMB;
         return particle;
     }
 
@@ -158,8 +161,9 @@ public class Gun : MonoBehaviour
         particle.AddComponent<AttractorForce>();
         particle.AddComponent<ForceMouseController>();
 
-        particle.GetComponent<AttractorForce>().power = -5;
+        particle.GetComponent<AttractorForce>().power = -100.0f;
         particle.GetComponent<ForceMouseController>().target = particle.GetComponent<AttractorForce>();
+        particle.GetComponent<ForceMouseController>().activationButton = ForceMouseController.MouseButton.RMB;
         return particle;
     }
 
