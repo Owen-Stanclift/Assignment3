@@ -11,7 +11,9 @@ public class AttractorForce : ForceGenerator
     public override void UpdateForce(Particle2D particle)
     {
         Vector2 displacement = (targetPos - particle.gameObject.transform.position);
-        Vector2 force = power * displacement.normalized;
+        float squareDistance = Mathf.Pow(displacement.magnitude, 2);
+        float scale = power / squareDistance;
+        Vector2 force = displacement.normalized * scale;
         particle.AddForce(force);
         // TODO: YOUR CODE HERE
     }

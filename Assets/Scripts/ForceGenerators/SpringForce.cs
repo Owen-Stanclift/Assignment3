@@ -14,8 +14,8 @@ public class SpringForce : ForceGenerator
     {
         // TODO: YOUR CODE HERE
         Vector2 length = (particle.transform.position - other.position);
-        float distance = Mathf.Abs(length.magnitude - restLength);
-        float springForce = -springConstant * distance;
+        float springDistance = length.magnitude - restLength;
+        float springForce = (-springConstant) * springDistance;
         Vector2 force = length.normalized * springForce;
         particle.AddForce(force);
     }
